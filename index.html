@@ -8,20 +8,25 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
-<body>
 
-<div class="background-image-class"></div>
+<body class ="bg-primary ">
+	
+
 <!-- <h1 id="title">AddressBook</h1> -->
 
 <div id="loginDiv">
-	<span id="inner-title">Address Book Login</span>
-	<input type="text" id="loginName" placeholder="Username" /><br />
-	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="btn btn-primary" onclick="doLogin();"> Submit </button>
+	<h1 class="display-1" style="text-align: center;">Address Book Login</h1>
+	<input type="text" id="loginName" class="form-control" placeholder="Username" /><br />
+	<input type="password" id="loginPassword" class="form-control" placeholder="Password"/><br />
+	<div class="btn-group" style="left: 50%; transform: translate(-50%, -50%);">
+	<button type="button" id="loginButton" class="btn btn-primary" onclick="doLogin();"> Login </button>
 	<button type="button" id="signupButton" class="btn btn-default" onclick="doSignup();"> Sign Up </button>
+	</div>
 	<span id="loginResult"></span>
-</div>
-</div>
+</div>		
+
+
 
 </body>
+
 </html>
