@@ -12,32 +12,24 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select Name from Colors where Name like ? and UserID=?");
-		$colorName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ss", $colorName, $inData["userId"]);
-		$stmt->execute();
+		$stmt = $conn->prepare("DELETE from Contacts WHERE FirstName like ? and LastName like ?");
+		$firstNameP = "%" . $inData["firstName"] . "%";
+		$lastNameP = "%" . $inData["lastName"] . "%";
+		$stmt->bind_param("ss", $firstNameP, $lastNameP);
 		
 		$result = $stmt->get_result();
 		
-		while($row = $result->fetch_assoc())
+		if($row = $result->fetch_assoc())
 		{
-			if( $searchCount > 0 )
-			{
-				$searchResults .= ",";
-			}
-			$searchCount++;
-			$searchResults .= '"' . $row["Name"] . '"';
-		}
-		
-		if( $searchCount == 0 )
-		{
-			returnWithError( "No Records Found" );
+			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
 		}
 		else
 		{
-			returnWithInfo( $searchResults );
+			returnWithError("No Records Found");
 		}
 		
+        $stmt->execute();
+
 		$stmt->close();
 		$conn->close();
 	}
@@ -59,9 +51,9 @@
 		sendResultInfoAsJson( $retValue );
 	}
 	
-	function returnWithInfo( $searchResults )
+	function returnWithInfo( $firstName, $lastName, $id )
 	{
-		$retValue = '{"results":[' . $searchResults . '],"error":""}';
+		$retValue = '{"DELETED: id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
