@@ -1,0 +1,29 @@
+<html>
+<head>
+	<title>Sign up Page</title>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+    <link href="css_old/styles.css" rel="stylesheet">	
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body class ="bg-primary ">
+	
+<h1 id="title">Sign up Page</h1>
+<div id="signUpDiv">
+	<h1 id="registration" style="text-align: center">Registration</h1>
+	<input type="text" id="firstName" class="form-control" placeholder="First Name"/>
+	<input type="text" id="lastName" class="form-control" placeholder="Last Name"/>
+	<input type="text" id="loginName" class="form-control" placeholder="Login Name"/>
+	<input type="text" id="loginPassword" class="form-control" placeholder="Password"/><br/>
+    <div class="btn-group" style="left: 50%; transform: translate(-50%, -50%);">
+        <button type="button" id="signupButton" class="btn btn-default" onclick="doSignup();"> Sign Up </button>
+	</div>
+	<span id="signUpResult"></span>
+</div>		
+
+</body>
+
+</html>
