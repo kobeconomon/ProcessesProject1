@@ -148,6 +148,9 @@ function doSignup()
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
 
+	// console.log("login variable: "+ login);
+	// console.log("password variable: " + password);
+
 	document.getElementById("signUpResult").innerHTML = "";
 
 	let tmp = {
@@ -158,7 +161,7 @@ function doSignup()
 
 	let jsonPayload = JSON.stringify( tmp );
 
-	let url = urlBase + '/AddUser.' + extension;
+	let url = urlBase + '/LAMPAPI/AddUser.' + extension;
 	
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -181,20 +184,21 @@ function doSignup()
 	
 }
 
-function searchColor()
+function searchContact()
 {
 	let srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
+	document.getElementById("contactSearchResult").innerHTML = "";
 	
 	let colorList = "";
 
-	let tmp = {search:srch,userId:userId};
+	let tmp = { search:srch };
+
 	let jsonPayload = JSON.stringify( tmp );
 
-	let url = urlBase + '/SearchColors.' + extension;
+	let url = urlBase + '/LAMPAPI/SearchContacts.' + extension;
 	
 	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
+	xhr.open("GET", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	try
 	{
@@ -202,7 +206,7 @@ function searchColor()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
+				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
 				let jsonObject = JSON.parse( xhr.responseText );
 				
 				for( let i=0; i<jsonObject.results.length; i++ )
@@ -221,7 +225,7 @@ function searchColor()
 	}
 	catch(err)
 	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
+		document.getElementById("contactSearchResult").innerHTML = err.message;
 	}
 	
 }
