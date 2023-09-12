@@ -1,4 +1,4 @@
-const urlBase = 'http://COP4331-5.com/LAMPAPI';
+const urlBase = 'http://cop4331group9.com';
 const extension = 'php';
 
 let userId = 0;
@@ -17,7 +17,8 @@ function doLogin()
 	
 	document.getElementById("loginResult").innerHTML = "";
 
-	let tmp = {login:login,password:password};
+	let tmp = { login:login,
+				password:password};
 //	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
@@ -135,6 +136,47 @@ function addColor()
 	catch(err)
 	{
 		document.getElementById("colorAddResult").innerHTML = err.message;
+	}
+	
+}
+
+function doSignup()
+{
+	firstName = document.getElementById("firstName").value;
+	lastName = document.getElementById("lastName").value;
+
+	let login = document.getElementById("loginName").value;
+	let password = document.getElementById("loginPassword").value;
+
+	document.getElementById("signUpResult").innerHTML = "";
+
+	let tmp = {
+				firstName:firstName,
+				lastName:lastName,
+				login: login,
+				password: password};
+
+	let jsonPayload = JSON.stringify( tmp );
+
+	let url = urlBase + '/AddUser.' + extension;
+	
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				document.getElementById("signUpResult").innerHTML = "A new user has been added";
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("signUpResult").innerHTML = err.message;
 	}
 	
 }
