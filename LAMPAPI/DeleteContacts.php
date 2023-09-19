@@ -12,34 +12,14 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select Name from Colors where Name like ? and UserID=?");
-		$colorName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ss", $colorName, $inData["userId"]);
+		$stmt = $conn->prepare("DELETE from Contacts WHERE ID = ?");
+		$stmt->bind_param("s", $inData["id"]);
 		$stmt->execute();
 		
-		$result = $stmt->get_result();
-		
-		while($row = $result->fetch_assoc())
-		{
-			if( $searchCount > 0 )
-			{
-				$searchResults .= ",";
-			}
-			$searchCount++;
-			$searchResults .= '"' . $row["Name"] . '"';
-		}
-		
-		if( $searchCount == 0 )
-		{
-			returnWithError( "No Records Found" );
-		}
-		else
-		{
-			returnWithInfo( $searchResults );
-		}
 		
 		$stmt->close();
 		$conn->close();
+		returnWithInfo($inData["id"]);
 	}
 
 	function getRequestInfo()
@@ -59,9 +39,9 @@
 		sendResultInfoAsJson( $retValue );
 	}
 	
-	function returnWithInfo( $searchResults )
+	function returnWithInfo( $id )
 	{
-		$retValue = '{"results":[' . $searchResults . '],"error":""}';
+		$retValue = '{"DELETED: id":' . $id . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
