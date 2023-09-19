@@ -12,26 +12,14 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("DELETE from Contacts WHERE FirstName like ? and LastName like ?");
-		$firstNameP = "%" . $inData["firstName"] . "%";
-		$lastNameP = "%" . $inData["lastName"] . "%";
-		$stmt->bind_param("ss", $firstNameP, $lastNameP);
+		$stmt = $conn->prepare("DELETE from Contacts WHERE ID = ?");
+		$stmt->bind_param("s", $inData["id"]);
+		$stmt->execute();
 		
-		$result = $stmt->get_result();
 		
-		if($row = $result->fetch_assoc())
-		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
-		}
-		else
-		{
-			returnWithError("No Records Found");
-		}
-		
-        $stmt->execute();
-
 		$stmt->close();
 		$conn->close();
+		returnWithInfo($inData["id"]);
 	}
 
 	function getRequestInfo()
@@ -51,9 +39,9 @@
 		sendResultInfoAsJson( $retValue );
 	}
 	
-	function returnWithInfo( $firstName, $lastName, $id )
+	function returnWithInfo( $id )
 	{
-		$retValue = '{"DELETED: id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+		$retValue = '{"DELETED: id":' . $id . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
 	

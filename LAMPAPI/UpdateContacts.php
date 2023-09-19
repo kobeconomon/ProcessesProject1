@@ -13,8 +13,8 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ? WHERE UserID like ? ");
-		$stmt->bind_param("sss", $inData["firstName"], $inData["lastName"], $inData["userID"]);
+		$stmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ?, Email = ?, PhoneNumber = ? WHERE UserID like ? ");
+		$stmt->bind_param("sssss", $inData["firstName"], $inData["lastName"],  $inData["email"],  $inData["phoneNumber"], $inData["userID"]);
 		$stmt->execute();
 
 		$result = $stmt->get_result();
