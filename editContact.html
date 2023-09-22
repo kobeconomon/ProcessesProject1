@@ -1,0 +1,32 @@
+<html>
+<head>
+	<title>Edit Contact</title>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class ="bg-primary ">
+	
+<div id="loginDiv">
+	<h1 class="display-1" style="text-align: center; margin-bottom: 25;">Contact Editor</h1>
+	<!-- <h1 id="registration" style="text-align: center">Registration</h1> -->
+ 
+  <div id="formDiv">
+  	<input type="text" id="firstName" class="form-control" placeholder="First Name"/>
+  	<input type="text" id="lastName" class="form-control" placeholder="Last Name"/>
+  	<input type="text" id="email" class="form-control" placeholder="Email"/>
+  	<input type="text" id="phoneNumber" class="form-control" placeholder="Phone Number"/>
+  	
+    <div class="btn-group" >
+		<a class="btn btn-link" href="/contacts.html">Back</a>
+        <button type="button" id="signupButton" class="btn btn-default" onclick="submitEditContact();"> Confirm </button>
+	  </div>
+   </div>
+</div>		
+
+</body>
+
+</html>
